@@ -37,7 +37,7 @@ pipeline {
 			steps {
 				script {
 					execute("git clone https://bitbucket.microchip.com/scm/~i15784/tool-mplabx-c-project-generator.git")
-					execute("cd tool-mplabx-c-project-generator && git checkout feature/devicepack")
+					execute("cd tool-mplabx-c-project-generator && git checkout feature/devicePack")
 					execute("cd tool-mplabx-c-project-generator && node configGenerator.js sp=../ v8=2.05")	
 				}
 			}
