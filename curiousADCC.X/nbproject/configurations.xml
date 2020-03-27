@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><configurationDescriptor version="66">
+  <logicalFolder displayName="root" name="root" projectFiles="true">
+    <logicalFolder displayName="Header Files" name="HeaderFiles" projectFiles="true">
+      <logicalFolder displayName="MCC Generated Files" name="MCC Generated Files" projectFiles="true">
+        <itemPath ex="false">mcc_generated_files/eusart1.h</itemPath>
+        <itemPath ex="false">mcc_generated_files/adcc.h</itemPath>
+        <itemPath ex="false">mcc_generated_files/interrupt_manager.h</itemPath>
+        <itemPath ex="false">mcc_generated_files/mcc.h</itemPath>
+        <itemPath ex="false">mcc_generated_files/pin_manager.h</itemPath>
+        <itemPath ex="false">mcc_generated_files/tmr0.h</itemPath>
+        <itemPath ex="false">mcc_generated_files/tmr4.h</itemPath>
+        <itemPath ex="false">mcc_generated_files/device_config.h</itemPath>
+      </logicalFolder>
+      <itemPath ex="false">application.h</itemPath>
+    </logicalFolder>
+    <logicalFolder displayName="Source Files" name="SourceFiles" projectFiles="true">
+      <logicalFolder displayName="MCC Generated Files" name="MCC Generated Files" projectFiles="true">
+        <itemPath ex="false">mcc_generated_files/eusart1.c</itemPath>
+        <itemPath ex="false">mcc_generated_files/adcc.c</itemPath>
+        <itemPath ex="false">mcc_generated_files/interrupt_manager.c</itemPath>
+        <itemPath ex="false">mcc_generated_files/mcc.c</itemPath>
+        <itemPath ex="false">mcc_generated_files/device_config.c</itemPath>
+        <itemPath ex="false">mcc_generated_files/pin_manager.c</itemPath>
+        <itemPath ex="false">mcc_generated_files/tmr0.c</itemPath>
+        <itemPath ex="false">mcc_generated_files/tmr4.c</itemPath>
+      </logicalFolder>
+      <itemPath ex="false">main.c</itemPath>
+      <itemPath ex="false">application.c</itemPath>
+    </logicalFolder>
+    <logicalFolder displayName="Important Files" name="ExternalFiles" projectFiles="false">
+      <itemPath ex="false">Makefile</itemPath>
+      <itemPath ex="false">device_config.mc3</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="free" type="2">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <targetDevice>PIC18F25Q10</targetDevice>
+        <targetHeader/>
+        <targetPluginBoard/>
+        <platformTool>PKOBSKDEPlatformTool</platformTool>
+        <languageToolchain>XC8</languageToolchain>
+        <languageToolchainVersion>2.10</languageToolchainVersion>
+        <platform>3</platform>
+      </toolsSet>
+      <packs>
+        <pack name="PIC18F-Q_DFP" vendor="Microchip" version="1.4.109"/>
+      </packs>
+      <compileType>
+        <linkerTool>
+          <linkerLibItems>
+          </linkerLibItems>
+        </linkerTool>
+        <archiverTool>
+        </archiverTool>
+        <loading>
+          <useAlternateLoadableFile>false</useAlternateLoadableFile>
+          <parseOnProdLoad>false</parseOnProdLoad>
+          <alternateLoadableFile/>
+        </loading>
+        <subordinates>
+        </subordinates>
+      </compileType>
+      <makeCustomizationType>
+        <makeCustomizationPreStepEnabled>false</makeCustomizationPreStepEnabled>
+        <makeCustomizationPreStep/>
+        <makeCustomizationPostStepEnabled>false</makeCustomizationPostStepEnabled>
+        <makeCustomizationPostStep/>
+        <makeCustomizationPutChecksumInUserID>false</makeCustomizationPutChecksumInUserID>
+        <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
+        <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
+      </makeCustomizationType>
+      <HI-TECH-COMP>
+        <property key="operation-mode" value="free"/>
+        <property key="optimization-debug" value="false"/>
+        <property key="optimization-speed" value="false"/>
+        <property key="verbose" value="false"/>
+        <property key="warning-level" value="-2"/>
+      </HI-TECH-COMP>
+      <HI-TECH-LINK>
+        <property key="data-model-size-of-double-float" value="24 bit"/>
+      </HI-TECH-LINK>
+      <PICkit3PlatformTool>
+        <property key="poweroptions.powerenable" value="false"/>
+        <property key="programoptions.uselvpprogramming" value="false"/>
+        <property key="voltagevalue" value="5.0"/>
+      </PICkit3PlatformTool>
+      <PKOBSKDEPlatformTool>
+        <property key="programoptions.eraseb4program" value="true"/>
+        <property key="programoptions.uselvpprogramming" value="true"/>
+      </PKOBSKDEPlatformTool>
+      <XC8-CO>
+        <property key="coverage-enable" value="false"/>
+      </XC8-CO>
+      <XC8-config-global>
+        <property key="advanced-elf" value="true"/>
+        <property key="output-file-format" value="-mcof,+elf"/>
+        <property key="stack-size-high" value="auto"/>
+        <property key="stack-size-low" value="auto"/>
+        <property key="stack-size-main" value="auto"/>
+        <property key="stack-type" value="compiled"/>
+      </XC8-config-global>
+    </conf>
+    <conf name="pro" type="2">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <targetDevice>PIC18F25Q10</targetDevice>
+        <targetHeader/>
+        <targetPluginBoard/>
+        <platformTool>PKOBSKDEPlatformTool</platformTool>
+        <languageToolchain>XC8</languageToolchain>
+        <languageToolchainVersion>2.10</languageToolchainVersion>
+        <platform>3</platform>
+      </toolsSet>
+      <packs>
+        <pack name="PIC18F-Q_DFP" vendor="Microchip" version="1.4.109"/>
+      </packs>
+      <compileType>
+        <linkerTool>
+          <linkerLibItems>
+          </linkerLibItems>
+        </linkerTool>
+        <archiverTool>
+        </archiverTool>
+        <loading>
+          <useAlternateLoadableFile>false</useAlternateLoadableFile>
+          <parseOnProdLoad>false</parseOnProdLoad>
+          <alternateLoadableFile/>
+        </loading>
+        <subordinates>
+        </subordinates>
+      </compileType>
+      <makeCustomizationType>
+        <makeCustomizationPreStepEnabled>false</makeCustomizationPreStepEnabled>
+        <makeCustomizationPreStep/>
+        <makeCustomizationPostStepEnabled>false</makeCustomizationPostStepEnabled>
+        <makeCustomizationPostStep/>
+        <makeCustomizationPutChecksumInUserID>false</makeCustomizationPutChecksumInUserID>
+        <makeCustomizationEnableLongLines>false</makeCustomizationEnableLongLines>
+        <makeCustomizationNormalizeHexFile>false</makeCustomizationNormalizeHexFile>
+      </makeCustomizationType>
+      <HI-TECH-COMP>
+        <property key="operation-mode" value="pro"/>
+        <property key="optimization-debug" value="false"/>
+        <property key="optimization-speed" value="false"/>
+        <property key="verbose" value="false"/>
+        <property key="warning-level" value="-2"/>
+      </HI-TECH-COMP>
+      <HI-TECH-LINK>
+        <property key="data-model-size-of-double-float" value="24 bit"/>
+      </HI-TECH-LINK>
+      <PICkit3PlatformTool>
+        <property key="poweroptions.powerenable" value="false"/>
+        <property key="programoptions.uselvpprogramming" value="false"/>
+        <property key="voltagevalue" value="5.0"/>
+      </PICkit3PlatformTool>
+      <PKOBSKDEPlatformTool>
+        <property key="programoptions.eraseb4program" value="true"/>
+        <property key="programoptions.uselvpprogramming" value="true"/>
+      </PKOBSKDEPlatformTool>
+      <XC8-config-global>
+        <property key="advanced-elf" value="true"/>
+        <property key="output-file-format" value="-mcof,+elf"/>
+        <property key="stack-size-high" value="auto"/>
+        <property key="stack-size-low" value="auto"/>
+        <property key="stack-size-main" value="auto"/>
+        <property key="stack-type" value="compiled"/>
+      </XC8-config-global>
+    </conf>
+  </confs>
+</configurationDescriptor>
