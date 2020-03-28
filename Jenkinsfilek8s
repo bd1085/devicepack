@@ -43,7 +43,7 @@ pipeline {
 					def packDir = "${env.MPLABX_PATH}/packs"
 					def xc8_version = "${env.XC8_PATH}" =~ /\d+\.\d+/
 					echo "$packDir"
-					echo "xc8_version"
+					echo "$xc8_version"
 					execute("git clone https://bitbucket.microchip.com/scm/~i15784/tool-mplabx-c-project-generator.git")
 					execute("cd tool-mplabx-c-project-generator && git checkout feature/devicePack")
 					execute("cd tool-mplabx-c-project-generator && node configGenerator.js sp=../ v8=2.10 packs=${packDir}")	
