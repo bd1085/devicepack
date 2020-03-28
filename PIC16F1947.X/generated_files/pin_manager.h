@@ -1,24 +1,24 @@
 /**
-  @Generated PIC10 / PIC12 / PIC16 / PIC18 MCUs Source File
+  @Generated Pin Manager Header File
 
   @Company:
     Microchip Technology Inc.
 
   @File Name:
-    mcc.c
+    pin_manager.h
 
   @Summary:
-    This is the device_config.c file generated using PIC10 / PIC12 / PIC16 / PIC18 MCUs
+    This is the Pin Manager file generated using PIC10 / PIC12 / PIC16 / PIC18 MCUs
 
-  @Description:
-    This header file provides implementations for driver APIs for all modules selected in the GUI.
+  @Description
+    This header file provides APIs for driver for .
     Generation Information :
         Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.78.1
-        Device            :  PIC10F320
-        Driver Version    :  2.00
+        Device            :  PIC16F1947
+        Driver Version    :  2.11
     The generated drivers are tested against the following:
-        Compiler          :  XC8 2.10 and above or later
-        MPLAB             :  MPLAB X 5.30
+        Compiler          :  XC8 2.10 and above
+        MPLAB 	          :  MPLAB X 5.30	
 */
 
 /*
@@ -44,16 +44,54 @@
     SOFTWARE.
 */
 
-// Configuration bits: selected in the GUI
+#ifndef PIN_MANAGER_H
+#define PIN_MANAGER_H
 
-// CONFIG
-#pragma config FOSC = INTOSC    // Oscillator Selection bits->INTOSC oscillator: CLKIN function disabled
-#pragma config BOREN = ON    // Brown-out Reset Enable->Brown-out Reset enabled
-#pragma config WDTE = OFF    // Watchdog Timer Enable->WDT disabled
-#pragma config PWRTE = OFF    // Power-up Timer Enable bit->PWRT disabled
-#pragma config MCLRE = ON    // MCLR Pin Function Select bit->MCLR pin function is MCLR
-#pragma config CP = OFF    // Code Protection bit->Program memory code protection is disabled
-#pragma config LVP = ON    // Low-Voltage Programming Enable->Low-voltage programming enabled
-#pragma config LPBOR = ON    // Brown-out Reset Selection bits->BOR enabled
-#pragma config BORV = LO    // Brown-out Reset Voltage Selection->Brown-out Reset Voltage (Vbor), low trip point selected.
-#pragma config WRT = OFF    // Flash Memory Self-Write Protection->Write protection off
+/**
+  Section: Included Files
+*/
+
+#include <xc.h>
+
+#define INPUT   1
+#define OUTPUT  0
+
+#define HIGH    1
+#define LOW     0
+
+#define ANALOG      1
+#define DIGITAL     0
+
+#define PULL_UP_ENABLED      1
+#define PULL_UP_DISABLED     0
+
+/**
+   @Param
+    none
+   @Returns
+    none
+   @Description
+    GPIO and peripheral I/O initialization
+   @Example
+    PIN_MANAGER_Initialize();
+ */
+void PIN_MANAGER_Initialize (void);
+
+/**
+ * @Param
+    none
+ * @Returns
+    none
+ * @Description
+    Interrupt on Change Handling routine
+ * @Example
+    PIN_MANAGER_IOC();
+ */
+void PIN_MANAGER_IOC(void);
+
+
+
+#endif // PIN_MANAGER_H
+/**
+ End of File
+*/

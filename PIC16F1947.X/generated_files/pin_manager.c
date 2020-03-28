@@ -1,24 +1,26 @@
 /**
-  @Generated PIC10 / PIC12 / PIC16 / PIC18 MCUs Source File
+  Generated Pin Manager File
 
-  @Company:
+  Company:
     Microchip Technology Inc.
 
-  @File Name:
-    mcc.c
+  File Name:
+    pin_manager.c
 
-  @Summary:
-    This is the mcc.c file generated using PIC10 / PIC12 / PIC16 / PIC18 MCUs
+  Summary:
+    This is the Pin Manager file generated using PIC10 / PIC12 / PIC16 / PIC18 MCUs
 
-  @Description:
-    This header file provides implementations for driver APIs for all modules selected in the GUI.
+  Description:
+    This header file provides implementations for pin APIs for all pins selected in the GUI.
     Generation Information :
         Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.78.1
-        Device            :  PIC10F320
-        Driver Version    :  2.00
+        Device            :  PIC16F1947
+        Driver Version    :  2.11
     The generated drivers are tested against the following:
-        Compiler          :  XC8 2.10 and above or later
+        Compiler          :  XC8 2.10 and above
         MPLAB             :  MPLAB X 5.30
+
+    Copyright (c) 2013 - 2015 released Microchip Technology Inc.  All rights reserved.
 */
 
 /*
@@ -44,34 +46,66 @@
     SOFTWARE.
 */
 
-#include "mcc.h"
+#include "pin_manager.h"
 
-#if (__XC8_VERSION < 1430)
-asm("psect functab,global,class=CODE,reloc=0x1,delta=2");
-#endif // __XC8_VERSION
 
-void SYSTEM_Initialize(void)
+
+
+
+void PIN_MANAGER_Initialize(void)
 {
+    /**
+    LATx registers
+    */
+    LATE = 0x00;
+    LATD = 0x00;
+    LATA = 0x00;
+    LATF = 0x00;
+    LATB = 0x00;
+    LATG = 0x00;
+    LATC = 0x00;
 
-    PIN_MANAGER_Initialize();
-    OSCILLATOR_Initialize();
-    WDT_Initialize();
+    /**
+    TRISx registers
+    */
+    TRISE = 0xFF;
+    TRISF = 0xFF;
+    TRISA = 0xFF;
+    TRISG = 0x3F;
+    TRISB = 0xFF;
+    TRISC = 0xFF;
+    TRISD = 0xFF;
+
+    /**
+    ANSELx registers
+    */
+    ANSELE = 0x07;
+    ANSELG = 0x1E;
+    ANSELF = 0xFF;
+    ANSELA = 0x2F;
+
+    /**
+    WPUx registers
+    */
+    WPUB = 0x00;
+    WPUG = 0x00;
+    OPTION_REGbits.nWPUEN = 1;
+
+
+    /**
+    APFCONx registers
+    */
+    APFCON = 0x00;
+
+
+
+
+   
+    
 }
-
-void OSCILLATOR_Initialize(void)
-{
-    // LFIOFR 31.25KHz_osc_not_ready; HFIOFS unstable; HFIOFR 16MHz_osc_not_ready; IRCF 8MHz; 
-    OSCCON = 0x60;
-    // CLKROE disabled; 
-    CLKRCON = 0x00;
-    // SBOREN disabled; BORFS disabled; BORRDY BOR Circuit is inactive; 
-    BORCON = 0x00;
-}
-
-void WDT_Initialize(void)
-{
-    // WDTPS 1:65536; SWDTEN OFF; 
-    WDTCON = 0x16;
+  
+void PIN_MANAGER_IOC(void)
+{   
 }
 
 /**

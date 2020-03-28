@@ -1,26 +1,24 @@
 /**
-  Generated Pin Manager File
+  @Generated PIC10 / PIC12 / PIC16 / PIC18 MCUs Header File
 
-  Company:
+  @Company:
     Microchip Technology Inc.
 
-  File Name:
-    pin_manager.c
+  @File Name:
+    mcc.c
 
-  Summary:
-    This is the Pin Manager file generated using PIC10 / PIC12 / PIC16 / PIC18 MCUs
+  @Summary:
+    This is the device_config.h file generated using PIC10 / PIC12 / PIC16 / PIC18 MCUs
 
-  Description:
-    This header file provides implementations for pin APIs for all pins selected in the GUI.
+  @Description:
+    This header file provides implementations for driver APIs for all modules selected in the GUI.
     Generation Information :
         Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.78.1
-        Device            :  PIC10F320
-        Driver Version    :  2.11
+        Device            :  PIC16F1947
+        Driver Version    :  2.00
     The generated drivers are tested against the following:
-        Compiler          :  XC8 2.10 and above
+        Compiler          :  XC8 2.10 and above or later
         MPLAB             :  MPLAB X 5.30
-
-    Copyright (c) 2013 - 2015 released Microchip Technology Inc.  All rights reserved.
 */
 
 /*
@@ -46,48 +44,12 @@
     SOFTWARE.
 */
 
-#include "pin_manager.h"
+#ifndef DEVICE_CONFIG_H
+#define	DEVICE_CONFIG_H
 
+#define _XTAL_FREQ 500000
 
-
-
-
-void PIN_MANAGER_Initialize(void)
-{
-    /**
-    LATx registers
-    */
-    LATA = 0x00;
-
-    /**
-    TRISx registers
-    */
-    TRISA = 0x07;
-
-    /**
-    ANSELx registers
-    */
-    ANSELA = 0x07;
-
-    /**
-    WPUx registers
-    */
-    WPUA = 0x00;
-    OPTION_REGbits.nWPUEN = 1;
-
-
-
-
-
-
-   
-    
-}
-  
-void PIN_MANAGER_IOC(void)
-{   
-}
-
+#endif	/* DEVICE_CONFIG_H */
 /**
  End of File
 */

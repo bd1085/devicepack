@@ -14,7 +14,7 @@
     This header file provides implementations for driver APIs for all modules selected in the GUI.
     Generation Information :
         Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.78.1
-        Device            :  PIC16LF18877
+        Device            :  PIC16F1947
         Driver Version    :  2.00
 */
 
@@ -41,7 +41,7 @@
     SOFTWARE.
 */
 
-#include "mcc_generated_files/mcc.h"
+#include "generated_files/mcc.h"
 
 /*
                          Main application
