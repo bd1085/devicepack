@@ -15,7 +15,7 @@ pipeline {
 	
 	environment {	
 		MPLABX_PATH= sh (script: 'update-alternatives --list MPLABX_PATH',returnStdout: true).trim()
-		XC8_PATH= sh (script: 'update-alternatives --list XC8_PATH',returnStdout: true).trim()
+		XC8_PATH= sh (script: 'update-alternatives --list XC8_PATH | grep -oP "\d+\.\d+"',returnStdout: true).trim()
 		GITHUB_URL ='https://github.com/bd1085/devicepack.git'
 		BITBUCKET_URL = 'https://bitbucket.microchip.com/scm/~i15784/devicepack.git'
 		DEPLOY_TOOL_URL = 'https://bitbucket.microchip.com/scm/citd/tool-github-deploy.git'
