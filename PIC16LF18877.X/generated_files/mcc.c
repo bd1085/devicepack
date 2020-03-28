@@ -14,7 +14,7 @@
     This header file provides implementations for driver APIs for all modules selected in the GUI.
     Generation Information :
         Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.78.1
-        Device            :  PIC16LF18877
+        Device            :  PIC10F320
         Driver Version    :  2.00
     The generated drivers are tested against the following:
         Compiler          :  XC8 2.10 and above or later
@@ -46,81 +46,33 @@
 
 #include "mcc.h"
 
+#if (__XC8_VERSION < 1430)
+asm("psect functab,global,class=CODE,reloc=0x1,delta=2");
+#endif // __XC8_VERSION
 
 void SYSTEM_Initialize(void)
 {
-    PMD_Initialize();
+
     PIN_MANAGER_Initialize();
-    SPI1_Initialize();
-    SPI2_Initialize();
     OSCILLATOR_Initialize();
-    CRC_Initialize();
-    NCO1_Initialize();
-    TMR4_Initialize();
-    PWM4_Initialize();
-    CLC2_Initialize();
-    SMT1_Initialize();
-    EXT_INT_Initialize();
-    TMR0_Initialize();
-    PWM6_Initialize();
-    PWM1_Initialize();
-    TMR6_Initialize();
-    CLC1_Initialize();
-    CMP1_Initialize();
-    CLC4_Initialize();
-    TMR3_Initialize();
-    PWM5_Initialize();
-    DSM_Initialize();
-    FVR_Initialize();
-    CMP2_Initialize();
-    DAC_Initialize();
-    PWM2_Initialize();
-    ADCC_Initialize();
-    TMR2_Initialize();
-    SMT2_Initialize();
-    CLC3_Initialize();
-    PWM3_Initialize();
-    TMR5_Initialize();
-    TMR1_Initialize();
-    PWM7_Initialize();
-    CWG2_Initialize();
-    CWG3_Initialize();
-    CWG1_Initialize();
-    EUSART_Initialize();
-    CLKREF_Initialize();
-    ZCD_Initialize();
+    WDT_Initialize();
 }
 
 void OSCILLATOR_Initialize(void)
 {
-    // NOSC HFINTOSC; NDIV 4; 
-    OSCCON1 = 0x62;
-    // CSWHOLD may proceed; SOSCPWR Low power; 
-    OSCCON3 = 0x00;
-    // MFOEN disabled; LFOEN disabled; ADOEN disabled; SOSCEN disabled; EXTOEN disabled; HFOEN disabled; 
-    OSCEN = 0x00;
-    // HFFRQ 4_MHz; 
-    OSCFRQ = 0x02;
-    // HFTUN 0; 
-    OSCTUNE = 0x00;
+    // LFIOFR 31.25KHz_osc_not_ready; HFIOFS unstable; HFIOFR 16MHz_osc_not_ready; IRCF 8MHz; 
+    OSCCON = 0x60;
+    // CLKROE disabled; 
+    CLKRCON = 0x00;
+    // SBOREN disabled; BORFS disabled; BORRDY BOR Circuit is inactive; 
+    BORCON = 0x00;
 }
 
-void PMD_Initialize(void)
+void WDT_Initialize(void)
 {
-    // CLKRMD CLKR enabled; SYSCMD SYSCLK enabled; SCANMD SCANNER enabled; FVRMD FVR enabled; IOCMD IOC enabled; CRCMD CRC enabled; NVMMD NVM enabled; 
-    PMD0 = 0x00;
-    // TMR0MD TMR0 enabled; TMR1MD TMR1 enabled; TMR4MD TMR4 enabled; TMR5MD TMR5 enabled; TMR2MD TMR2 enabled; TMR3MD TMR3 enabled; NCOMD DDS(NCO) enabled; TMR6MD TMR6 enabled; 
-    PMD1 = 0x00;
-    // ZCDMD ZCD enabled; DACMD DAC enabled; CMP1MD CMP1 enabled; ADCMD ADC enabled; CMP2MD CMP2 enabled; 
-    PMD2 = 0x00;
-    // CCP2MD CCP2 enabled; CCP1MD CCP1 enabled; CCP4MD CCP4 enabled; CCP3MD CCP3 enabled; CCP5MD CCP5 enabled; PWM6MD PWM6 enabled; PWM7MD PWM7 enabled; 
-    PMD3 = 0x00;
-    // CWG3MD CWG3 enabled; CWG2MD CWG2 enabled; CWG1MD CWG1 enabled; MSSP1MD MSSP1 enabled; UART1MD EUSART enabled; MSSP2MD MSSP2 enabled; 
-    PMD4 = 0x00;
-    // DSMMD DSM enabled; CLC3MD CLC3 enabled; CLC4MD CLC4 enabled; SMT1MD SMT1 enabled; SMT2MD SMT2 enabled; CLC1MD CLC1 enabled; CLC2MD CLC2 enabled; 
-    PMD5 = 0x00;
+    // WDTPS 1:65536; SWDTEN OFF; 
+    WDTCON = 0x16;
 }
-
 
 /**
  End of File

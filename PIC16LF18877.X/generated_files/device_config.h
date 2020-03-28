@@ -14,7 +14,7 @@
     This header file provides implementations for driver APIs for all modules selected in the GUI.
     Generation Information :
         Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.78.1
-        Device            :  PIC16LF18877
+        Device            :  PIC10F320
         Driver Version    :  2.00
     The generated drivers are tested against the following:
         Compiler          :  XC8 2.10 and above or later
@@ -47,7 +47,7 @@
 #ifndef DEVICE_CONFIG_H
 #define	DEVICE_CONFIG_H
 
-#define _XTAL_FREQ 1000000
+#define _XTAL_FREQ 8000000
 
 #endif	/* DEVICE_CONFIG_H */
 /**

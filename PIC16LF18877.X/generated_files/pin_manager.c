@@ -1,24 +1,26 @@
 /**
-  PWM3 Generated Driver File
+  Generated Pin Manager File
 
-  @Company
+  Company:
     Microchip Technology Inc.
 
-  @File Name
-    pwm3.c
+  File Name:
+    pin_manager.c
 
-  @Summary
-    This is the generated driver implementation file for the PWM3 driver using PIC10 / PIC12 / PIC16 / PIC18 MCUs
+  Summary:
+    This is the Pin Manager file generated using PIC10 / PIC12 / PIC16 / PIC18 MCUs
 
-  @Description
-    This source file provides implementations for driver APIs for PWM3.
+  Description:
+    This header file provides implementations for pin APIs for all pins selected in the GUI.
     Generation Information :
         Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.78.1
-        Device            :  PIC16LF18877
-        Driver Version    :  2.01
+        Device            :  PIC10F320
+        Driver Version    :  2.11
     The generated drivers are tested against the following:
         Compiler          :  XC8 2.10 and above
-         MPLAB 	          :  MPLAB X 5.30
+        MPLAB             :  MPLAB X 5.30
+
+    Copyright (c) 2013 - 2015 released Microchip Technology Inc.  All rights reserved.
 */
 
 /*
@@ -44,65 +46,48 @@
     SOFTWARE.
 */
 
-/**
-  Section: Included Files
-*/
+#include "pin_manager.h"
 
-#include <xc.h>
-#include "pwm3.h"
 
-/**
-  Section: Macro Declarations
-*/
 
-#define PWM3_INITIALIZE_DUTY_VALUE    0
 
-/**
-  Section: PWM Module APIs
-*/
 
-void PWM3_Initialize(void)
+void PIN_MANAGER_Initialize(void)
 {
-    // Set the PWM3 to the options selected in the User Interface
-	
-	// MODE PWM; EN enabled; CCP3FMT right_aligned; 
-	CCP3CON = 0x8F;    
-	
-	// RH 0; 
-	CCPR3H = 0x00;    
-	
-	// RL 0; 
-	CCPR3L = 0x00;    
+    /**
+    LATx registers
+    */
+    LATA = 0x00;
 
-	// Selecting Timer 2
-	CCPTMRS0bits.C3TSEL = 0x1;
+    /**
+    TRISx registers
+    */
+    TRISA = 0x07;
+
+    /**
+    ANSELx registers
+    */
+    ANSELA = 0x07;
+
+    /**
+    WPUx registers
+    */
+    WPUA = 0x00;
+    OPTION_REGbits.nWPUEN = 1;
+
+
+
+
+
+
+   
     
 }
-
-void PWM3_LoadDutyValue(uint16_t dutyValue)
-{
-    dutyValue &= 0x03FF;
-    
-    // Load duty cycle value
-    if(CCP3CONbits.CCP3FMT)
-    {
-        dutyValue <<= 6;
-        CCPR3H = dutyValue >> 8;
-        CCPR3L = dutyValue;
-    }
-    else
-    {
-        CCPR3H = dutyValue >> 8;
-        CCPR3L = dutyValue;
-    }
+  
+void PIN_MANAGER_IOC(void)
+{   
 }
 
-bool PWM3_OutputStatusGet(void)
-{
-    // Returns the output status
-    return(CCP3CONbits.OUT);
-}
 /**
  End of File
 */
-

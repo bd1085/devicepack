@@ -1,24 +1,24 @@
 /**
-  PWM1 Generated Driver File
+  @Generated Pin Manager Header File
 
-  @Company
+  @Company:
     Microchip Technology Inc.
 
-  @File Name
-    pwm1.c
+  @File Name:
+    pin_manager.h
 
-  @Summary
-    This is the generated driver implementation file for the PWM1 driver using PIC10 / PIC12 / PIC16 / PIC18 MCUs
+  @Summary:
+    This is the Pin Manager file generated using PIC10 / PIC12 / PIC16 / PIC18 MCUs
 
   @Description
-    This source file provides implementations for driver APIs for PWM1.
+    This header file provides APIs for driver for .
     Generation Information :
         Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.78.1
-        Device            :  PIC16LF18877
-        Driver Version    :  2.01
+        Device            :  PIC10F320
+        Driver Version    :  2.11
     The generated drivers are tested against the following:
         Compiler          :  XC8 2.10 and above
-         MPLAB 	          :  MPLAB X 5.30
+        MPLAB 	          :  MPLAB X 5.30	
 */
 
 /*
@@ -44,65 +44,54 @@
     SOFTWARE.
 */
 
+#ifndef PIN_MANAGER_H
+#define PIN_MANAGER_H
+
 /**
   Section: Included Files
 */
 
 #include <xc.h>
-#include "pwm1.h"
+
+#define INPUT   1
+#define OUTPUT  0
+
+#define HIGH    1
+#define LOW     0
+
+#define ANALOG      1
+#define DIGITAL     0
+
+#define PULL_UP_ENABLED      1
+#define PULL_UP_DISABLED     0
 
 /**
-  Section: Macro Declarations
-*/
-
-#define PWM1_INITIALIZE_DUTY_VALUE    0
+   @Param
+    none
+   @Returns
+    none
+   @Description
+    GPIO and peripheral I/O initialization
+   @Example
+    PIN_MANAGER_Initialize();
+ */
+void PIN_MANAGER_Initialize (void);
 
 /**
-  Section: PWM Module APIs
-*/
+ * @Param
+    none
+ * @Returns
+    none
+ * @Description
+    Interrupt on Change Handling routine
+ * @Example
+    PIN_MANAGER_IOC();
+ */
+void PIN_MANAGER_IOC(void);
 
-void PWM1_Initialize(void)
-{
-    // Set the PWM1 to the options selected in the User Interface
-	
-	// MODE PWM; EN enabled; CCP1FMT right_aligned; 
-	CCP1CON = 0x8F;    
-	
-	// RH 0; 
-	CCPR1H = 0x00;    
-	
-	// RL 0; 
-	CCPR1L = 0x00;    
 
-	// Selecting Timer 2
-	CCPTMRS0bits.C1TSEL = 0x1;
-    
-}
 
-void PWM1_LoadDutyValue(uint16_t dutyValue)
-{
-    dutyValue &= 0x03FF;
-    
-    // Load duty cycle value
-    if(CCP1CONbits.CCP1FMT)
-    {
-        dutyValue <<= 6;
-        CCPR1H = dutyValue >> 8;
-        CCPR1L = dutyValue;
-    }
-    else
-    {
-        CCPR1H = dutyValue >> 8;
-        CCPR1L = dutyValue;
-    }
-}
-
-bool PWM1_OutputStatusGet(void)
-{
-    // Returns the output status
-    return(CCP1CONbits.OUT);
-}
+#endif // PIN_MANAGER_H
 /**
  End of File
 */
-

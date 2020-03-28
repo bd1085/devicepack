@@ -14,7 +14,7 @@
     This header file provides implementations for driver APIs for all modules selected in the GUI.
     Generation Information :
         Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.78.1
-        Device            :  PIC16LF18877
+        Device            :  PIC10F320
         Driver Version    :  2.00
     The generated drivers are tested against the following:
         Compiler          :  XC8 2.10 and above or later
@@ -52,45 +52,6 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <conio.h>
-#include "interrupt_manager.h"
-#include "spi2.h"
-#include "spi1.h"
-#include "cmp2.h"
-#include "cmp1.h"
-#include "adcc.h"
-#include "fvr.h"
-#include "nco1.h"
-#include "dsm.h"
-#include "tmr5.h"
-#include "tmr6.h"
-#include "tmr3.h"
-#include "tmr4.h"
-#include "tmr1.h"
-#include "tmr2.h"
-#include "tmr0.h"
-#include "clc4.h"
-#include "clc3.h"
-#include "clc2.h"
-#include "clc1.h"
-#include "smt2.h"
-#include "smt1.h"
-#include "crc.h"
-#include "dac.h"
-#include "pwm6.h"
-#include "pwm7.h"
-#include "pwm4.h"
-#include "pwm5.h"
-#include "pwm1.h"
-#include "pwm2.h"
-#include "pwm3.h"
-#include "memory.h"
-#include "ext_int.h"
-#include "cwg1.h"
-#include "cwg2.h"
-#include "cwg3.h"
-#include "eusart.h"
-#include "clkref.h"
-#include "zcd.h"
 
 
 
@@ -119,20 +80,18 @@ void SYSTEM_Initialize(void);
     OSCILLATOR_Initialize(void);
  */
 void OSCILLATOR_Initialize(void);
-
 /**
  * @Param
     none
  * @Returns
     none
  * @Description
-    Initializes the PMD module to the default states configured in the
+    Initializes the WDT module to the default states configured in the
  *                  MCC GUI
  * @Example
-    PMD_Initialize(void);
+    WDT_Initialize(void);
  */
-void PMD_Initialize(void);
-
+void WDT_Initialize(void);
 
 #endif	/* MCC_H */
 /**
