@@ -40,10 +40,9 @@ pipeline {
 				
 				script {
 					echo "$env.MPLABX_PATH"
-					echo "$env.XC8_PATH" |cut -d'/' f 3
 					def packDir = "${env.MPLABX_PATH}/packs"
-					
-				
+					def version = env.XC8_PATH:18:21
+					echo "$version"
 					
 					execute("git clone https://bitbucket.microchip.com/scm/~i15784/tool-mplabx-c-project-generator.git")
 					execute("cd tool-mplabx-c-project-generator && git checkout feature/devicePack")
