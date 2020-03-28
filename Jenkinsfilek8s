@@ -43,7 +43,7 @@ pipeline {
 					def packDir = "${env.MPLABX_PATH}/packs"
 					def v = (env.XC8_PATH =~ /\d+\.\d+/)
 					echo "$packDir"
-					v = v.group()
+					
 					echo "$v"
 					execute("git clone https://bitbucket.microchip.com/scm/~i15784/tool-mplabx-c-project-generator.git")
 					execute("cd tool-mplabx-c-project-generator && git checkout feature/devicePack")
