@@ -41,7 +41,7 @@ pipeline {
 					echo "$env.MPLABX_PATH"
 					echo "$env.XC8_PATH"
 					def packDir = "${env.MPLABX_PATH}/packs"
-					def xc8_version = (env.XC8_PATH =~ /\d+\.\d+/)
+					def xc8_version = (env.XC8_PATH ==~ /\d+\.\d+/)
 					echo "$packDir"
 					echo "$xc8_version[0]"
 					execute("git clone https://bitbucket.microchip.com/scm/~i15784/tool-mplabx-c-project-generator.git")
