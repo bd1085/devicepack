@@ -38,15 +38,13 @@ pipeline {
 		stage('Pre-build') {
 			steps {
 				
-				script {
-					echo "$env.MPLABX_PATH"
-					def packDir = "${env.MPLABX_PATH}/packs"					
-					def version = env.XC8_PATH.split('/')[4].substring(1)
-					echo "$version"
+				script {					
+					def pDir = "${env.MPLABX_PATH}/packs"					
+					def ver = env.XC8_PATH.split('/')[4].substring(1)		
 					
 					execute("git clone https://bitbucket.microchip.com/scm/~i15784/tool-mplabx-c-project-generator.git")
 					execute("cd tool-mplabx-c-project-generator && git checkout feature/devicePack")
-					execute("cd tool-mplabx-c-project-generator && node configGenerator.js sp=../ v8=2.10 packs=${packDir}")	
+					execute("cd tool-mplabx-c-project-generator && node configGenerator.js sp=../ v8=${ver} packs=${pDir}")	
 				}
 			}
 		}
