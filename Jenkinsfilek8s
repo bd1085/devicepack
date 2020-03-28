@@ -37,6 +37,8 @@ pipeline {
 		
 		stage('Pre-build') {
 			steps {
+				def version = (env.XC8_PATH =~ /(xc8)/)
+				echo "$version"
 				script {
 					echo "$env.MPLABX_PATH"
 					echo "$env.XC8_PATH"
