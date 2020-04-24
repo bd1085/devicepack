@@ -68,7 +68,7 @@ pipeline {
 					execute("git clone ${env.DEPLOY_TOOL_URL}")							
 					
 					withCredentials([usernamePassword(credentialsId: 'GitHubToken', usernameVariable: 'USER_NAME', passwordVariable:'USER_TOKEN' )]) {					
-						execute("cd ${env.DEPLOY_SCRIPT_DIR} && bash ${env.DEPLOY_SCRIPT_FILE} ${env.BITBUCKET_URL} ${env.GITHUB_URL} ${USER_NAME} ${USER_TOKEN}")	
+						execute("cd ${env.DEPLOY_SCRIPT_DIR} && bash ${env.DEPLOY_SCRIPT_FILE} ${env.BITBUCKET_URL} ${env.GITHUB_URL} ${USER_NAME} ${USER_TOKEN} '--tag ${env.TAG_NAME}'")	
 					}						
 				}
 			}
