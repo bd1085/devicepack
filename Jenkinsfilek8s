@@ -50,7 +50,7 @@ pipeline {
 		stage('Build') {
             steps {
 				script {						
-					withEnv(["PATH=$AVR8_PATH:$PATH"]) 
+					withEnv(["PATH=$XC8_PATH:$PATH"]) 
 					{
 						execute("git clone https://bitbucket.microchip.com/scm/citd/tool-mplabx-c-build.git")								
 						execute("cd tool-mplabx-c-build && node buildLauncher.js sp=../ rp=./output genMK=true")		 
