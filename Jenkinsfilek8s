@@ -13,9 +13,7 @@ pipeline {
                 description: "Email to send build failure and fixed notifications.")
     }
 	
-	environment {	
-		MPLABX_PATH= sh (script: 'update-alternatives --list MPLABX_PATH',returnStdout: true).trim()
-		XC8_PATH= sh (script: 'update-alternatives --list XC8_PATH',returnStdout: true).trim()		
+	environment {		
 		GITHUB_URL ='https://github.com/bd1085/devicepack.git'
 		BITBUCKET_URL = 'https://bitbucket.microchip.com/scm/~i15784/devicepack.git'
 		DEPLOY_TOOL_URL = 'https://bitbucket.microchip.com/scm/citd/tool-github-deploy.git'
@@ -37,13 +35,13 @@ pipeline {
 		
 		stage('Pre-build') {
 			steps {
-				
 				script {					
-					def pDir = "${env.MPLABX_PATH}/packs"					
-					def ver = env.XC8_PATH.split('/')[4].substring(1)		
+					MPLABX_PATH= sh (script: 'update-alternatives --list MPLABX_PATH',returnStdout: true).trim()
+					XC8_PATH= sh (script: 'update-alternatives --list XC8_PATH',returnStdout: true).trim()										
+					def pDir = "${MPLABX_PATH}/packs"					
+					def ver = XC8_PATH.split('/')[4].substring(1)		
 					
-					execute("git clone https://bitbucket.microchip.com/scm/~i15784/tool-mplabx-c-project-generator.git")
-					execute("cd tool-mplabx-c-project-generator && git checkout feature/devicePack")
+					execute("git clone https://bitbucket.microchip.com/scm/citd/tool-mplabx-c-project-generator.git")					
 					execute("cd tool-mplabx-c-project-generator && node configGenerator.js sp=../ v8=${ver} packs=${pDir}")	
 				}
 			}
@@ -52,8 +50,7 @@ pipeline {
 		stage('Build') {
             steps {
 				script {
-					execute("git clone https://bitbucket.microchip.com/scm/~i15784/tool-mplabx-c-build.git")
-					execute("cd tool-mplabx-c-build && git checkout feature/dfpversion_in_report")					
+					execute("git clone https://bitbucket.microchip.com/scm/citd/tool-mplabx-c-build.git")								
 					execute("cd tool-mplabx-c-build && node buildLauncher.js sp=../ rp=./output genMK=true")		 
 				}
             }
