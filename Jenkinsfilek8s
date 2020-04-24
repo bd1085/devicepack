@@ -37,9 +37,9 @@ pipeline {
 			steps {
 				script {					
 					MPLABX_PATH= sh (script: 'update-alternatives --list MPLABX_PATH',returnStdout: true).trim()
-					XC8_PATH= sh (script: 'update-alternatives --list XC8_PATH',returnStdout: true).trim()										
+					COMPILER_PATH= sh (script: 'update-alternatives --list XC8_PATH',returnStdout: true).trim()										
 					def pDir = "${MPLABX_PATH}/packs"					
-					def ver = XC8_PATH.split('/')[4].substring(1)		
+					def ver = COMPILER_PATH.split('/')[4].substring(1)		
 					
 					execute("git clone https://bitbucket.microchip.com/scm/citd/tool-mplabx-c-project-generator.git")					
 					execute("cd tool-mplabx-c-project-generator && node configGenerator.js sp=../ v8=${ver} packs=${pDir}")	
@@ -50,7 +50,7 @@ pipeline {
 		stage('Build') {
             steps {
 				script {						
-					withEnv(["PATH=$XC8_PATH:$PATH"]) 
+					withEnv(["PATH=$COMPILER_PATH:$PATH"]) 
 					{
 						execute("git clone https://bitbucket.microchip.com/scm/citd/tool-mplabx-c-build.git")								
 						execute("cd tool-mplabx-c-build && node buildLauncher.js sp=../ rp=./output genMK=true")		 
