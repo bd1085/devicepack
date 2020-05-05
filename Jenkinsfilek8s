@@ -66,10 +66,11 @@ pipeline {
 				}
             }
 			steps {
-				script {
+				script
+				{
 					execute("git clone ${env.DEPLOY_TOOL_URL}")		
 					execute("cd ${env.DEPLOY_SCRIPT_DIR} && git checkout feature/annotatedTag")
-					
+	
 					withCredentials([usernamePassword(credentialsId: 'GitHubToken', usernameVariable: 'USER_NAME', passwordVariable:'USER_PASS' )]) {					
 						execute("cd ${env.DEPLOY_SCRIPT_DIR} && bash ${env.DEPLOY_SCRIPT_FILE} ${env.BITBUCKET_URL} ${env.GITHUB_URL} ${USER_NAME} ${USER_PASS} '--tag ${env.TAG_NAME}'")	
 					}	
