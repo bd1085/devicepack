@@ -66,8 +66,7 @@ pipeline {
 				}
             }
 			steps {
-				script
-				{
+				script {
 					execute("git clone ${env.DEPLOY_TOOL_URL}")		
 					execute("cd ${env.DEPLOY_SCRIPT_DIR} && git checkout feature/annotatedTag")
 	
