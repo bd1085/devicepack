@@ -41,7 +41,8 @@ pipeline {
 					def pDir = "${MPLABX_PATH}/packs"					
 					def ver = COMPILER_PATH.split('/')[4].substring(1)		
 					
-					execute("git clone https://bitbucket.microchip.com/scm/citd/tool-mplabx-c-project-generator.git")					
+					execute("git clone https://bitbucket.microchip.com/scm/~i15784/tool-mplabx-c-project-generator.git")	
+					execute("cd tool-mplabx-c-project-generator && git checkout bugFix/citd-250")
 					execute("cd tool-mplabx-c-project-generator && node configGenerator.js sp=../ v8=${ver} packs=${pDir}")	
 				}
 			}
