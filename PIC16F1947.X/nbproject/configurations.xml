@@ -4,15 +4,9 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
-      <itemPath>application.h</itemPath>
-      <itemPath>mcc_generated_files/adcc.h</itemPath>
-      <itemPath>mcc_generated_files/device_config.h</itemPath>
-      <itemPath>mcc_generated_files/eusart1.h</itemPath>
-      <itemPath>mcc_generated_files/interrupt_manager.h</itemPath>
-      <itemPath>mcc_generated_files/mcc.h</itemPath>
-      <itemPath>mcc_generated_files/pin_manager.h</itemPath>
-      <itemPath>mcc_generated_files/tmr0.h</itemPath>
-      <itemPath>mcc_generated_files/tmr4.h</itemPath>
+      <itemPath>generated_files/device_config.h</itemPath>
+      <itemPath>generated_files/mcc.h</itemPath>
+      <itemPath>generated_files/pin_manager.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -21,16 +15,10 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>application.c</itemPath>
+      <itemPath>generated_files/device_config.c</itemPath>
+      <itemPath>generated_files/mcc.c</itemPath>
+      <itemPath>generated_files/pin_manager.c</itemPath>
       <itemPath>main.c</itemPath>
-      <itemPath>mcc_generated_files/adcc.c</itemPath>
-      <itemPath>mcc_generated_files/device_config.c</itemPath>
-      <itemPath>mcc_generated_files/eusart1.c</itemPath>
-      <itemPath>mcc_generated_files/interrupt_manager.c</itemPath>
-      <itemPath>mcc_generated_files/mcc.c</itemPath>
-      <itemPath>mcc_generated_files/pin_manager.c</itemPath>
-      <itemPath>mcc_generated_files/tmr0.c</itemPath>
-      <itemPath>mcc_generated_files/tmr4.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
@@ -38,7 +26,7 @@
     <conf name="default" type="2">
       <toolsSet>
         <developmentServer>localhost</developmentServer>
-        <targetDevice>PIC18F25Q10</targetDevice>
+        <targetDevice>PIC16F1947</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
         <platformTool>Simulator</platformTool>
@@ -47,7 +35,7 @@
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="PIC18F-Q_DFP" vendor="Microchip" version="1.7.135"/>
+        <pack name="PIC12-16F1xxx_DFP" vendor="Microchip" version="1.2.63"/>
       </packs>
       <compileType>
         <linkerTool>

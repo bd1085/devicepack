@@ -3,7 +3,7 @@
     <type>com.microchip.mplab.nbide.embedded.makeproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
-            <name>curiousADCC.X</name>
+            <name>PIC16F1947.X</name>
             <creation-uuid>02e672d1-e692-4fab-8091-7bfc662308cf</creation-uuid>
             <make-project-type>0</make-project-type>
             <c-extensions>c</c-extensions>
