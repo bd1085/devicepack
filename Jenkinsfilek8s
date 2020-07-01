@@ -63,6 +63,7 @@ pipeline {
 						def slug = GIT_URL.tokenize('/')[4]
 						slug = slug.substring(0, slug.lastIndexOf('.')) //Remove .git
 						zip archive: true, dir: 'tool-mplabx-c-build/output',zipFile: "${slug}-${BRANCH_NAME}-${BUILD_NUMBER}.zip"
+						archiveArtifacts artifacts: "${slug}-${BRANCH_NAME}-${BUILD_NUMBER}.zip", allowEmptyArchive: true, fingerprint: true
 					}
 				}
 			}
@@ -97,9 +98,6 @@ pipeline {
             script {			
 				sendPipelineFailureEmail()
             }
-        }
-        always {
-            archiveArtifacts artifacts: "report.zip", allowEmptyArchive: true, fingerprint: true
         }
     }
 }
