@@ -52,7 +52,12 @@ pipeline {
             steps {
 				script {
 					execute("git clone https://bitbucket.microchip.com/scm/citd/tool-mplabx-c-build.git")						
-					execute("cd tool-mplabx-c-build && node buildLauncher.js sp=../ rp=./output genMK=true")		 
+					execute("cd tool-mplabx-c-build && node buildLauncher.js sp=../ rp=./output genMK=true")	
+				}
+				post {
+					always {
+						zip archive: true, dir: 'tool-mplabx-c-build/output',zipFile: 'report.zip'
+					}
 				}
             }
         }	
@@ -88,7 +93,7 @@ pipeline {
             }
         }
         always {
-            archiveArtifacts artifacts: "tool-mplabx-c-build/output/**", allowEmptyArchive: true, fingerprint: true
+            archiveArtifacts artifacts: "report.zip", allowEmptyArchive: true, fingerprint: true
         }
     }
 }
