@@ -62,7 +62,7 @@ pipeline {
 						def key = GIT_URL.tokenize('/')[3]
 						def slug = GIT_URL.tokenize('/')[4]
 						slug = slug.substring(0, slug.lastIndexOf('.')) //Remove .git
-						zip archive: true, dir: 'tool-mplabx-c-build/output',zipFile: "${slug}-${BRANCH_NUMBER}-${BUILD_NUMBER}.zip"
+						zip archive: true, dir: 'tool-mplabx-c-build/output',zipFile: "${slug}-${BRANCH_NAME}-${BUILD_NUMBER}.zip"
 					}
 				}
 			}
