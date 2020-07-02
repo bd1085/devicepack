@@ -19,6 +19,8 @@ pipeline {
 		DEPLOY_TOOL_URL = 'https://bitbucket.microchip.com/scm/~i15784/tool-github-deploy.git'
 		DEPLOY_SCRIPT_DIR = 'tool-github-deploy'
 		DEPLOY_SCRIPT_FILE = 'deploy-source-as-is.sh'
+		ARTIFACTORY_SERVER = 'https://artifacts.microchip.com:7999/artifactory'
+		ARTIFACTORY_REPOSITORY = 'citd/report'
 	}
 
     options {
@@ -50,23 +52,11 @@ pipeline {
 
 		stage('Build') {
             steps {
-				script {
-					execute("printenv")
+				script {				
 					execute("git clone https://bitbucket.microchip.com/scm/citd/tool-mplabx-c-build.git")						
 					execute("cd tool-mplabx-c-build && node buildLauncher.js sp=../ rp=./output genMK=true")	
 				}
             }
-			post {
-				always {
-					script {
-						def key = GIT_URL.tokenize('/')[3]
-						def slug = GIT_URL.tokenize('/')[4]
-						slug = slug.substring(0, slug.lastIndexOf('.')) //Remove .git
-						zip archive: true, dir: 'tool-mplabx-c-build/output',zipFile: "${slug}-${BRANCH_NAME}-${BUILD_NUMBER}.zip"
-						archiveArtifacts artifacts: "${slug}-${BRANCH_NAME}-${BUILD_NUMBER}.zip", allowEmptyArchive: true, fingerprint: true
-					}
-				}
-			}
         }	
 		
         stage('Deploy') {
@@ -94,6 +84,11 @@ pipeline {
 	}
 
     post {
+		always {
+			script {
+				deployReport("tool-mplabx-c-build/output")
+			}
+		}
         failure {			
             script {			
 				sendPipelineFailureEmail()
@@ -109,6 +104,15 @@ def execute(String cmd) {
 		bat cmd
 	}
 }
+
+def deployReport(String srcDir) {
+	def key = GIT_URL.tokenize('/')[3]
+	def slug = GIT_URL.tokenize('/')[4]
+	slug = slug.substring(0, slug.lastIndexOf('.')) //Remove .git
+	zip archive: true, dir: '"${srcDir}"',zipFile: "${slug}-${BRANCH_NAME}-${BUILD_NUMBER}.zip"
+    execute("curl -T ${slug}-${BRANCH_NAME}-${BUILD_NUMBER}.zip '${env.ARTIFACTORY_SERVER}/${env.ARTIFACTORY_REPOSITORY}/${key}/${slug}/${BRANCH_NAME}/${slug}-${BRANCH_NAME}-${BUILD_NUMBER}.zip'");
+}
+
 
 def sendPipelineFailureEmail () {
     if (!"${env.CHANGE_AUTHOR_EMAIL}".equalsIgnoreCase("null")) {		  
