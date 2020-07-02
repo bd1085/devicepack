@@ -106,10 +106,11 @@ def execute(String cmd) {
 }
 
 def deployReport(String srcDir) {
+	def source = srcDir
 	def key = GIT_URL.tokenize('/')[3]
 	def slug = GIT_URL.tokenize('/')[4]
 	slug = slug.substring(0, slug.lastIndexOf('.')) //Remove .git
-	zip archive: true, dir: '"${srcDir}"',zipFile: "${slug}-${BRANCH_NAME}-${BUILD_NUMBER}.zip"
+	zip archive: true, dir: "${source}",zipFile: "${slug}-${BRANCH_NAME}-${BUILD_NUMBER}.zip"
     execute("curl -T ${slug}-${BRANCH_NAME}-${BUILD_NUMBER}.zip '${env.ARTIFACTORY_SERVER}/${env.ARTIFACTORY_REPOSITORY}/${key}/${slug}/${BRANCH_NAME}/${slug}-${BRANCH_NAME}-${BUILD_NUMBER}.zip'");
 }
 
