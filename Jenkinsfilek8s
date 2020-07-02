@@ -110,11 +110,17 @@ def deployReport(String srcDir) {
 	def key = GIT_URL.tokenize('/')[3]
 	def slug = GIT_URL.tokenize('/')[4]
 	slug = slug.substring(0, slug.lastIndexOf('.')) //Remove .git
-	zip archive: true, dir: "${source}",zipFile: "${slug}-${BRANCH_NAME}-${BUILD_NUMBER}.zip"
-    execute("curl -T ${slug}-${BRANCH_NAME}-${BUILD_NUMBER}.zip '${env.ARTIFACTORY_SERVER}/${env.ARTIFACTORY_REPOSITORY}/${key}/${slug}/${BRANCH_NAME}/${slug}-${BRANCH_NAME}-${BUILD_NUMBER}.zip'");
+	def zipFile = "${slug}-${BRANCH_NAME}-${BUILD_NUMBER}.zip"
+	def targetZipFile = "${env.ARTIFACTORY_SERVER}/${env.ARTIFACTORY_REPOSITORY}/${key}/${slug}/${BRANCH_NAME}/${slug}-${BRANCH_NAME}-${BUILD_NUMBER}.zip"
+	zip archive: true, dir: "${source}",zipFile: "${zipFile}"
+    execute("curl -T ${zipFile} ${targetZipFile}");
 }
 
-
+def sendRepoertEmail(String link) {
+    mail to: "${params.NOTIFICATION_EMAIL}",
+    subject: "Report: ${currentBuild.fullDisplayName}",
+    body: "Report: ${link}"
+}
 def sendPipelineFailureEmail () {
     if (!"${env.CHANGE_AUTHOR_EMAIL}".equalsIgnoreCase("null")) {		  
         mail to: "${env.CHANGE_AUTHOR_EMAIL}, ${params.NOTIFICATION_EMAIL}",
