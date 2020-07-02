@@ -107,6 +107,7 @@ def execute(String cmd) {
 
 def deployReport(String srcDir) {
 	def source = srcDir
+	echo "${currentBuild.fullDisplayName}"
 	def key = GIT_URL.tokenize('/')[3]
 	def slug = GIT_URL.tokenize('/')[4]
 	slug = slug.substring(0, slug.lastIndexOf('.')) //Remove .git
