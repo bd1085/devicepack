@@ -86,7 +86,7 @@ pipeline {
     post {
 		always {
 			script {
-				deployReport("tool-mplabx-c-build/output")
+				deployReport("tool-mplabx-c-build/output/**")
 			}
 		}
         failure {			
@@ -105,15 +105,14 @@ def execute(String cmd) {
 	}
 }
 
-def deployReport(String srcDir) {
-	def source = srcDir
-	echo "${currentBuild.fullDisplayName}"
+def deployReport(String src) {
+	def source = src	
 	def key = GIT_URL.tokenize('/')[3]
 	def slug = GIT_URL.tokenize('/')[4]
 	slug = slug.substring(0, slug.lastIndexOf('.')) //Remove .git
 	def zipFile = "${slug}-${BRANCH_NAME}-${BUILD_NUMBER}.zip"
 	def targetZipFile = "${env.ARTIFACTORY_SERVER}/${env.ARTIFACTORY_REPOSITORY}/${key}/${slug}/${BRANCH_NAME}/${slug}-${BRANCH_NAME}-${BUILD_NUMBER}.zip"
-	zip archive: false, dir: "${source}",zipFile: "${zipFile}"
+	zip archive: false, glob: "${source}",zipFile: "${zipFile}"
     execute("curl -T ${zipFile} ${targetZipFile}");
 	
 	sendRepoertEmail(targetZipFile)
