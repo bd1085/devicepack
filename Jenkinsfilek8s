@@ -114,6 +114,8 @@ def deployReport(String srcDir) {
 	def targetZipFile = "${env.ARTIFACTORY_SERVER}/${env.ARTIFACTORY_REPOSITORY}/${key}/${slug}/${BRANCH_NAME}/${slug}-${BRANCH_NAME}-${BUILD_NUMBER}.zip"
 	zip archive: true, dir: "${source}",zipFile: "${zipFile}"
     execute("curl -T ${zipFile} ${targetZipFile}");
+	
+	sendRepoertEmail(targetZipFile)
 }
 
 def sendRepoertEmail(String link) {
