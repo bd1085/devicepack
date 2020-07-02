@@ -113,7 +113,7 @@ def deployReport(String srcDir) {
 	slug = slug.substring(0, slug.lastIndexOf('.')) //Remove .git
 	def zipFile = "${slug}-${BRANCH_NAME}-${BUILD_NUMBER}.zip"
 	def targetZipFile = "${env.ARTIFACTORY_SERVER}/${env.ARTIFACTORY_REPOSITORY}/${key}/${slug}/${BRANCH_NAME}/${slug}-${BRANCH_NAME}-${BUILD_NUMBER}.zip"
-	zip archive: true, dir: "${source}",zipFile: "${zipFile}"
+	zip archive: false, dir: "${source}",zipFile: "${zipFile}"
     execute("curl -T ${zipFile} ${targetZipFile}");
 	
 	sendRepoertEmail(targetZipFile)
