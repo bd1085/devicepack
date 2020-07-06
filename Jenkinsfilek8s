@@ -123,6 +123,7 @@ def sendRepoertEmail(String link) {
     subject: "Report: ${currentBuild.fullDisplayName}",
     body: "Report: ${link}"
 }
+
 def sendPipelineFailureEmail () {
     if (!"${env.CHANGE_AUTHOR_EMAIL}".equalsIgnoreCase("null")) {		  
         mail to: "${env.CHANGE_AUTHOR_EMAIL}, ${params.NOTIFICATION_EMAIL}",
