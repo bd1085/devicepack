@@ -111,7 +111,7 @@ def deployReport(String src) {
 	def slug = GIT_URL.tokenize('/')[4]
 	slug = slug.substring(0, slug.lastIndexOf('.')) //Remove .git
 	def zipFile = "${slug}-${BRANCH_NAME}-${BUILD_NUMBER}.zip"
-	def targetZipFile = "${env.ARTIFACTORY_SERVER}/${env.ARTIFACTORY_REPOSITORY}/${key}/${slug}/${BRANCH_NAME}/${slug}-${BRANCH_NAME}-${BUILD_NUMBER}.zip"
+	def targetZipFile = "${env.ARTIFACTORY_SERVER}/${env.ARTIFACTORY_REPOSITORY}/${key}/${slug}/${BRANCH_NAME}/${slug}-${BRANCH_NAME}.zip"
 	zip archive: false, glob: "${source}",zipFile: "${zipFile}"
     execute("curl -T ${zipFile} ${targetZipFile}");
 	
