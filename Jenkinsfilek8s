@@ -102,7 +102,7 @@ pipeline {
 		always {
 			script {
 				if(env.BRANCH_NAME == 'develop') {
-					archiveArtifacts artifacts: "tool-mplabx-c-build/output/**", allowEmptyArchive: true fingerprint: true
+					archiveArtifacts artifacts: "tool-mplabx-c-build/output/**", allowEmptyArchive: true, fingerprint: true
 				}				
 			}
 		}
