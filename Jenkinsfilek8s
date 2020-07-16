@@ -80,13 +80,30 @@ pipeline {
                     sendSuccessfulGithubDeploymentEmail()					
 				}
 			}
-        }		
+        }	
+		stage('report') {
+			when {
+				not { 
+					changeRequest() 
+				}
+				anyOf {
+					tag ''
+				}
+			}
+			steps {
+				script {
+					deployReport("tool-mplabx-c-build/output/**")
+				}
+			}
+		}
 	}
 
     post {
 		always {
 			script {
-				deployReport("tool-mplabx-c-build/output/**")
+				if(env.BRANCH_NAME == 'develop') {
+					archiveArtifacts artifacts: "tool-mplabx-c-build/output/**", allowEmptyArchive: true fingerprint: true
+				}				
 			}
 		}
         failure {			
