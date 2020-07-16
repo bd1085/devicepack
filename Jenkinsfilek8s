@@ -81,21 +81,6 @@ pipeline {
 				}
 			}
         }	
-		stage('report') {
-			when {
-				not { 
-					changeRequest() 
-				}
-				anyOf {
-					tag ''
-				}
-			}
-			steps {
-				script {
-					deployReport("tool-mplabx-c-build/output/**")
-				}
-			}
-		}
 	}
 
     post {
@@ -103,7 +88,10 @@ pipeline {
 			script {
 				if(env.BRANCH_NAME == 'develop') {
 					archiveArtifacts artifacts: "tool-mplabx-c-build/output/**", allowEmptyArchive: true, fingerprint: true
-				}				
+				}
+				if(env.TAG_NAME != null) {
+					deployReport("tool-mplabx-c-build/output/**")
+				}
 			}
 		}
         failure {			
@@ -124,15 +112,17 @@ def execute(String cmd) {
 
 def deployReport(String src) {
 	def source = src	
-	def key = GIT_URL.tokenize('/')[3]
-	def slug = GIT_URL.tokenize('/')[4]
-	slug = slug.substring(0, slug.lastIndexOf('.')) //Remove .git
-	def zipFile = "${slug}-${BRANCH_NAME}-${BUILD_NUMBER}.zip"
-	def targetZipFile = "${env.ARTIFACTORY_SERVER}/${env.ARTIFACTORY_REPOSITORY}/${key}/${slug}/${BRANCH_NAME}/${slug}-${BRANCH_NAME}.zip"
-	zip archive: false, glob: "${source}",zipFile: "${zipFile}"
-    execute("curl -T ${zipFile} ${targetZipFile}");
-	
-	sendRepoertEmail(targetZipFile)
+	def files = findFiles glob: "${source}" 
+	if( files.length > 0 ) {		
+		def key = GIT_URL.tokenize('/')[3]
+		def slug = GIT_URL.tokenize('/')[4]
+		slug = slug.substring(0, slug.lastIndexOf('.')) //Remove .git
+		def zipFile = "${slug}-${BRANCH_NAME}-${BUILD_NUMBER}.zip"
+		def targetZipFile = "${env.ARTIFACTORY_SERVER}/${env.ARTIFACTORY_REPOSITORY}/${key}/${slug}/${BRANCH_NAME}/${slug}-${BRANCH_NAME}-${BUILD_NUMBER}.zip"
+		zip archive: false, glob: "${source}",zipFile: "${zipFile}"
+		execute("curl -T ${zipFile} ${targetZipFile}")		
+		sendRepoertEmail(targetZipFile)
+	}
 }
 
 def sendRepoertEmail(String link) {
