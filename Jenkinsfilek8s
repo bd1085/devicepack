@@ -152,6 +152,7 @@ def sendSuccessfulGithubDeploymentEmail () {
 
 def download(String url,String toolDir) {
 	def response =sh(script:"curl ${url} -o ${toolDir}.zip",returnStdout: true).trim()
-	unzip zipFile: "${toolDir}.zip", dir:"${toolDir}, test: true"
+	def zipResponse = unzip zipFile: "${toolDir}.zip", dir:"${toolDir}, test: true, read:true, quiet:true"
+	echo "zipResponse: ${zipResponse}"
 	execute("rm -rf ${toolDir}.zip")
 }
