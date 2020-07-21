@@ -52,8 +52,7 @@ pipeline {
 
 		stage('Build') {
             steps {
-				script {				
-					//execute("git clone https://bitbucket.microchip.com/scm/citd/tool-mplabx-c-build.git")	
+				script {							
 					download("https://artifacts.microchip.com:7999/artifactory/citd/tools/tool-mplabx-c-build/0.0.1-rc9/tool-mplabx-c-build-0.0.1-rc9.zip","tool-mplabx-c-build")
 					execute("cd tool-mplabx-c-build && node buildLauncher.js sp=../ rp=./output genMK=true")	
 				}
