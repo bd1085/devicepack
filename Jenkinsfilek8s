@@ -54,7 +54,7 @@ pipeline {
             steps {
 				script {				
 					//execute("git clone https://bitbucket.microchip.com/scm/citd/tool-mplabx-c-build.git")	
-					download("https://artifacts.microchip.com:7999/artifactory/citd/tools/tool-mplabx-c-build/0.0.1-rc9/tool-mplabx-c-build-0.0.1-rc10.zip","tool-mplabx-c-build")
+					download("https://artifacts.microchip.com:7999/artifactory/citd/tools/tool-mplabx-c-build/0.0.1-rc9/tool-mplabx-c-build-0.0.1-rc9.zip","tool-mplabx-c-build")
 					execute("cd tool-mplabx-c-build && node buildLauncher.js sp=../ rp=./output genMK=true")	
 				}
             }
@@ -152,7 +152,6 @@ def sendSuccessfulGithubDeploymentEmail () {
 
 def download(String url,String toolDir) {
 	def response =sh(script:"curl ${url} -o ${toolDir}.zip",returnStdout: true).trim()
-	echo "response:-${response}"
-	unzip zipFile: "${toolDir}.zip", dir:"${toolDir}"	
+	unzip zipFile: "${toolDir}.zip", dir:"${toolDir}, quiet: true"	
 	execute("rm -rf ${toolDir}.zip")
 }
