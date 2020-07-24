@@ -53,7 +53,7 @@ pipeline {
 		stage('Build') {
             steps {
 				script {
-					def toolURL = "https://artifacts.microchip.com:7999/artifactory/citd/tools/tool-mplabx-c-build/0.0.1-rc9/tool-mplabx-c-build-0.0.1-rc9.zip"
+					def toolURL = "https://artifacts.microchip.com/artifactory/ivy/citd/tool-mplabx-c-build/0.0.1-rc3/tool-mplabx-c-build-0.0.1-rc3.zip"
 					download(toolURL,"tool-mplabx-c-build")
 					execute("cd tool-mplabx-c-build && node buildLauncher.js sp=../ rp=./output genMK=true")	
 				}
