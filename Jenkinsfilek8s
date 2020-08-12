@@ -43,8 +43,7 @@ pipeline {
 					def pDir = "${MPLABX_PATH}/packs"					
 					def ver = COMPILER_PATH.split('/')[4].substring(1)		
 					
-					execute("git clone https://bitbucket.microchip.com/scm/~i15784/tool-mplabx-c-project-generator.git")	
-					execute("cd tool-mplabx-c-project-generator && git checkout bugFix/citd-250")
+					execute("git clone https://bitbucket.microchip.com/scm/citd/tool-mplabx-c-project-generator.git")	
 					execute("cd tool-mplabx-c-project-generator && node configGenerator.js sp=../ v8=${ver} packs=${pDir} ")	
 				}
 			}
@@ -53,8 +52,9 @@ pipeline {
 		stage('Build') {
             steps {
 				script {
-					def toolURL = "https://artifacts.microchip.com/artifactory/ivy/citd/tool-mplabx-c-build/0.0.1-rc3/tool-mplabx-c-build-0.0.1-rc3.zip"
-					download(toolURL,"tool-mplabx-c-build")
+					def toolName = "tool-mplabx-c-build"
+					def version = "0.0.1-rc4"
+					download(toolName,version)
 					execute("cd tool-mplabx-c-build && node buildLauncher.js sp=../ rp=./output genMK=true")	
 				}
             }
@@ -72,7 +72,6 @@ pipeline {
 			steps {
 				script {
 					execute("git clone ${env.DEPLOY_TOOL_URL}")		
-					execute("cd ${env.DEPLOY_SCRIPT_DIR} && git checkout feature/annotatedTag")
 	
 					withCredentials([usernamePassword(credentialsId: 'GitHubToken', usernameVariable: 'USER_NAME', passwordVariable:'USER_PASS' )]) {					
 						execute("cd ${env.DEPLOY_SCRIPT_DIR} && bash ${env.DEPLOY_SCRIPT_FILE} ${env.BITBUCKET_URL} ${env.GITHUB_URL} ${USER_NAME} ${USER_PASS} '--tag ${env.TAG_NAME}'")	
@@ -150,8 +149,10 @@ def sendSuccessfulGithubDeploymentEmail () {
     body: "The changes have been successfully deployed to GitHub. ${env.GITHUB_URL}"
 }
 
-def download(String url,String toolDir) {
-	def response =sh(script:"curl ${url} -o ${toolDir}.zip",returnStdout: true).trim()
-	unzip dir:"${toolDir}", quiet: true, zipFile: "${toolDir}.zip"	
-	execute("rm -rf ${toolDir}.zip")
+def download(String toolName,String toolVersion) {
+	def repo = "ivy/citd"
+	def url = "${env.ARTIFACTORY_SERVER}/${repo}/${toolName}/${toolVersion}/${toolName}-${toolVersion}.zip"
+	def response =sh(script:"curl ${url} -o ${toolName}.zip",returnStdout: true).trim()
+	unzip dir:"${toolName}", quiet: true, zipFile: "${toolName}.zip"	
+	execute("rm -rf ${toolName}.zip")
 }
