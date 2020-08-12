@@ -72,6 +72,7 @@ pipeline {
 			steps {
 				script {
 					execute("pip install PyGithub")
+					execute("pip install atlassian-python-api")
 					execute("git clone ${env.DEPLOY_TOOL_URL}")		
 					execute("chmod +x ./tool-github-deploy/tool-github-deploy/tool-github-deploy.py")       
 					withCredentials([usernamePassword(credentialsId: 'GitHubToken', usernameVariable: 'USER_NAME', passwordVariable:'USER_PASS' )]) {					
