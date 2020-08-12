@@ -16,7 +16,7 @@ pipeline {
 	environment {		
 		GITHUB_URL ='https://github.com/bd1085/devicepack.git'
 		BITBUCKET_URL = 'https://bitbucket.microchip.com/scm/~i15784/devicepack.git'
-		DEPLOY_TOOL_URL = 'https://bitbucket.microchip.com/scm/~i15784/tool-github-deploy.git'
+		DEPLOY_TOOL_URL = 'https://bitbucket.microchip.com/scm/citd/tool-github-deploy.git'
 		DEPLOY_SCRIPT_DIR = 'tool-github-deploy'
 		DEPLOY_SCRIPT_FILE = 'deploy-source-as-is.sh'
 		ARTIFACTORY_SERVER = 'https://artifacts.microchip.com:7999/artifactory'
