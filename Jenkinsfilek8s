@@ -71,6 +71,8 @@ pipeline {
             }
 			steps {
 				script {
+					execute("apt-get update")
+					execute("apt-get -y upgrade")
 					execute("pip install PyGithub")
 					execute("pip install atlassian-python-api")
 					execute("git clone ${env.DEPLOY_TOOL_URL}")		
