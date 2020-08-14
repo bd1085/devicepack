@@ -77,7 +77,7 @@ pipeline {
 					}
 					
 					withCredentials([usernamePassword(credentialsId: 'GitHubToken', usernameVariable: 'USER_NAME', passwordVariable:'USER_PASS' )]) {					
-						execute("python ./tool-github-deploy/tool-github-deploy/tool-github-deploy.py -rlo=true -gpat=${USER_PASS} -dgid=${USER_NAME} -rpn=devicepack-1 -rltv=${env.TAG_NAME} -rltt=${env.TAG_NAME} -rlnp=CHANGELOG.md")	
+						execute("python ./tool-github-deploy/tool-github-deploy/tool-github-deploy.py -rlo=true -gpat=${USER_PASS} -dgid=${USER_NAME} -rpn=devicepack -rltv=${env.TAG_NAME} -rltt=${env.TAG_NAME} -rlnp=CHANGELOG.md")	
 					}
 
                     sendSuccessfulGithubDeploymentEmail()					
