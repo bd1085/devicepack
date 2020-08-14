@@ -14,7 +14,7 @@ pipeline {
     }
 	
 	environment {		
-		GITHUB_URL ='https://github.com/bd1085/devicepack-1'
+		GITHUB_URL ='https://github.com/bd1085/devicepack'
 		BITBUCKET_URL = 'https://bitbucket.microchip.com/scm/~i15784/devicepack.git'
 		DEPLOY_TOOL_URL = 'https://bitbucket.microchip.com/scm/~i15784/tool-github-deploy.git'
 		DEPLOY_SCRIPT_DIR = 'tool-github-deploy'
