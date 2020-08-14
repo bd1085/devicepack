@@ -71,14 +71,9 @@ pipeline {
             }
 			steps {
 				script {
-					execute("apt-get update")
-					execute("apt-get -y upgrade")
-					execute("pip install PyGithub")
-					execute("pip install atlassian-python-api")
-					execute("git clone ${env.DEPLOY_TOOL_URL}")		
-					execute("chmod +x ./tool-github-deploy/tool-github-deploy/tool-github-deploy.py")       
+					downloadDeployTool()
 					withCredentials([usernamePassword(credentialsId: 'GitHubToken', usernameVariable: 'USER_NAME', passwordVariable:'USER_PASS' )]) {					
-						execute("python ${env.DEPLOY_SCRIPT_DIR}/${env.DEPLOY_SCRIPT_DIR}/tool-github-deploy.py -deploy=true -dburl=${env.BITBUCKET_URL} -dgurl=${env.GITHUB_URL} -dgid=${USER_NAME} -gpat=${USER_PASS} -dtag=${env.TAG_NAME}")	
+						execute("python ./tool-github-deploy/tool-github-deploy/tool-github-deploy.py -deploy=true -dburl=${env.BITBUCKET_URL} -dgurl=${env.GITHUB_URL} -dgid=${USER_NAME} -gpat=${USER_PASS} -dtag=${env.TAG_NAME}")	
 					}	
 
                     sendSuccessfulGithubDeploymentEmail()					
@@ -159,4 +154,13 @@ def download(String toolName,String toolVersion) {
 	def response =sh(script:"curl ${url} -o ${toolName}.zip",returnStdout: true).trim()
 	unzip dir:"${toolName}", quiet: true, zipFile: "${toolName}.zip"	
 	execute("rm -rf ${toolName}.zip")
+}
+def downloadDeployTool()
+{
+	execute("apt-get update")
+	execute("apt-get -y upgrade")
+	execute("pip install PyGithub")
+	execute("pip install atlassian-python-api")
+	execute("git clone ${env.DEPLOY_TOOL_URL}")		
+	execute("chmod +x ./tool-github-deploy/tool-github-deploy/tool-github-deploy.py")  
 }
