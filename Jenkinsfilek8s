@@ -167,6 +167,5 @@ def downloadDeployTool()
 	execute("pip install PyGithub")
 	execute("pip install atlassian-python-api")
 	execute("git clone ${env.DEPLOY_TOOL_URL}")		
-	execute("cd ${env.DEPLOY_SCRIPT_DIR} && git checkout feature/pythonTool")
 	execute("chmod +x ./tool-github-deploy/tool-github-deploy/tool-github-deploy.py")  
 }
