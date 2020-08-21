@@ -17,8 +17,6 @@ pipeline {
 		GITHUB_URL ='https://github.com/bd1085/devicepack'
 		BITBUCKET_URL = 'https://bitbucket.microchip.com/scm/~i15784/devicepack.git'
 		DEPLOY_TOOL_URL = 'https://bitbucket.microchip.com/scm/citd/tool-github-deploy.git'
-		DEPLOY_SCRIPT_DIR = 'tool-github-deploy'
-		DEPLOY_SCRIPT_FILE = 'deploy-source-as-is.sh'
 		ARTIFACTORY_SERVER = 'https://artifacts.microchip.com:7999/artifactory'
 		ARTIFACTORY_REPOSITORY = 'citd/report'
 	}
@@ -73,13 +71,11 @@ pipeline {
 				script {
 					downloadDeployTool()
 					withCredentials([usernamePassword(credentialsId: 'GitHubToken', usernameVariable: 'USER_NAME', passwordVariable:'USER_PASS' )]) {					
-						execute("python ./tool-github-deploy/tool-github-deploy/tool-github-deploy.py -deploy=true -gpat=${USER_PASS} -dgid=${USER_NAME} -dburl=${env.BITBUCKET_URL} -dgurl=${env.GITHUB_URL} -dbranch=master -dmfd=true")	
-					}
-					
-					writeFile file: 'deploy_sandbox/CHANGELOG.md', text: ""
+						execute("python ./tool-github-deploy/tool-github-deploy/tool-github-deploy.py -deploy=true -gpat=${USER_PASS} -dgid=${USER_NAME} -dburl=${env.BITBUCKET_URL} -dgurl=${env.GITHUB_URL} -dbranch=master -dtag=${env.TAG_NAME} -dmfd=true")	
+					}					
 					
 					withCredentials([usernamePassword(credentialsId: 'GitHubToken', usernameVariable: 'USER_NAME', passwordVariable:'USER_PASS' )]) {					
-						execute("python ./tool-github-deploy/tool-github-deploy/tool-github-deploy.py -rlo=true -gpat=${USER_PASS} -dgid=${USER_NAME} -rpn=devicepack -rltv=${env.TAG_NAME} -rltt=${env.TAG_NAME}")	
+						execute("python ./tool-github-deploy/tool-github-deploy/tool-github-deploy.py -rlo=true -gpat=${USER_PASS} -dgid=${USER_NAME} -rpn=devicepack -rltv=${env.TAG_NAME} -rltt=${env.TAG_NAME} -dmfd=true")	
 					}
 
                     sendSuccessfulGithubDeploymentEmail()					
