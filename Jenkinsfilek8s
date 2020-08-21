@@ -79,7 +79,7 @@ pipeline {
 					writeFile file: 'deploy_sandbox/CHANGELOG.md', text: ""
 					
 					withCredentials([usernamePassword(credentialsId: 'GitHubToken', usernameVariable: 'USER_NAME', passwordVariable:'USER_PASS' )]) {					
-						execute("python ./tool-github-deploy/tool-github-deploy/tool-github-deploy.py -rlo=true -gpat=${USER_PASS} -dgid=${USER_NAME} -rpn=devicepack -rltv=${env.TAG_NAME} -rltt=${env.TAG_NAME} -rlnp=CHANGELOG.md")	
+						execute("python ./tool-github-deploy/tool-github-deploy/tool-github-deploy.py -rlo=true -gpat=${USER_PASS} -dgid=${USER_NAME} -rpn=devicepack -rltv=${env.TAG_NAME} -rltt=${env.TAG_NAME}")	
 					}
 
                     sendSuccessfulGithubDeploymentEmail()					
@@ -164,10 +164,6 @@ def download(String toolName,String toolVersion) {
 
 def downloadDeployTool()
 {
-	execute("apt-get update")
-	execute("apt-get -y upgrade")
-	execute("pip install PyGithub")
-	execute("pip install atlassian-python-api")
 	execute("git clone ${env.DEPLOY_TOOL_URL}")		
 	execute("chmod +x ./tool-github-deploy/tool-github-deploy/tool-github-deploy.py")  
 }
