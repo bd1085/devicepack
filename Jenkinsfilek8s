@@ -41,7 +41,7 @@ pipeline {
 					def ver = COMPILER_PATH.split('/')[4].substring(1)		
 					
 					def toolName = "tool-mplabx-c-project-generator"
-					def toolVersion = "1,0,0"
+					def toolVersion = "1.0.0"
 					download(toolName,toolVersion)
 					execute("cd tool-mplabx-c-project-generator && node configGenerator.js sp=../ v8=${ver} packs=${pDir} ")	
 				}
