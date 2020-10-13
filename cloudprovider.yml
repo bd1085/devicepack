@@ -17,7 +17,7 @@ spec:
           cpu: 0.5
           memory: 750Mi
     - name: python
-      image: artifacts.microchip.com:7999/microchip/citd/python:3.x
+      image: artifacts.microchip.com:7999/microchip/citd/gcovr:4.2
       imagePullPolicy: Always
       command: ['cat']
       tty: true
