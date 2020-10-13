@@ -15,8 +15,7 @@ pipeline {
 	
 	environment {		
 		GITHUB_URL ='https://github.com/bd1085/devicepack'
-		BITBUCKET_URL = 'https://bitbucket.microchip.com/scm/~i15784/devicepack.git'
-		DEPLOY_TOOL_URL = 'https://bitbucket.microchip.com/scm/citd/tool-github-deploy.git'
+		BITBUCKET_URL = 'https://bitbucket.microchip.com/scm/~i15784/devicepack.git'	
 		ARTIFACTORY_SERVER = 'https://artifacts.microchip.com:7999/artifactory'
 		ARTIFACTORY_REPOSITORY = 'citd/report'
 	}
@@ -41,7 +40,9 @@ pipeline {
 					def pDir = "${MPLABX_PATH}/packs"					
 					def ver = COMPILER_PATH.split('/')[4].substring(1)		
 					
-					execute("git clone https://bitbucket.microchip.com/scm/citd/tool-mplabx-c-project-generator.git")	
+					def toolName = "tool-mplabx-c-project-generator"
+					def toolVersion = "1,0,0"
+					download(toolName,version)
 					execute("cd tool-mplabx-c-project-generator && node configGenerator.js sp=../ v8=${ver} packs=${pDir} ")	
 				}
 			}
@@ -51,8 +52,8 @@ pipeline {
             steps {
 				script {
 					def toolName = "tool-mplabx-c-build"
-					def version = "0.0.1-rc4"
-					download(toolName,version)
+					def toolVersion = "1.0.0"
+					download(toolName,toolVersion)
 					execute("cd tool-mplabx-c-build && node buildLauncher.js sp=../ rp=./output genMK=true")	
 				}
             }
@@ -161,6 +162,8 @@ def download(String toolName,String toolVersion) {
 
 def downloadDeployTool()
 {
-	execute("git clone ${env.DEPLOY_TOOL_URL}")		
+	def toolName = "tool-github-deploy"
+	def toolVersion = "1.0.0"
+	download(toolName,toolVersion)
 	execute("chmod +x ./tool-github-deploy/tool-github-deploy/tool-github-deploy.py")  
 }
